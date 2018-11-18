@@ -2,6 +2,11 @@
 
 ![puzzle](https://github.com/dacalder/puzzle-solver/blob/master/docs/images/puzzle.png)
 
-<h2> Overview </h2>
+<h3> Overview </h3>
+The objective of this puzzle is to move the red block (0) to the top (i.e. where the orange piece is currently located). 
+1. The black pieces can't be moved.
+2. Pieces can't overlap.
+3. Pieces can't be rotated.
+
 
 
