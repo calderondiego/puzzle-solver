@@ -1,3 +1,9 @@
+/* Project: Puzzle solver
+   Purpose: Find the solution of a puzzle in the least number of steps
+   Programmer: Diego Calderon
+   Date: February, 2017
+   Update: November, 2018
+*/
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -6,6 +12,8 @@ import java.util.TreeSet;
 class GameState 
 {
 	private GameState previous;
+	//the state represents the position of the pieces relative to their original position 
+	//{0,0,0...,0} represents the original position, {1,0,0,...,0} represents that the first piece was moved a unit to the right
 	private byte[] state;
 	
 	GameState(GameState _prev)
@@ -74,10 +82,6 @@ class StateComparator implements Comparator<byte[]>
  */
 class PuzzleSolver 
 {
-	
-	//shapes: 1 = 3. 2 = 4. 5 =10. 8 = 9.
-	
-	//byte[] state;
 	byte[] positions;
 	byte[] objective;
 	byte[] currentAux; // will use this to check boundaries
@@ -94,7 +98,7 @@ class PuzzleSolver
 	//search for the shortest path (breadth first search)
 	public GameState bfs ()
 	{
-		//to check if state exists in the set
+		//to check if a state exists in the set
 		StateComparator comp = new StateComparator();
 
 		//set
@@ -118,7 +122,7 @@ class PuzzleSolver
 			{	
 				return current;
 			}	
-			//add all possible movements with current state of the puzzle
+			//add all possible movements given the current state of the puzzle
 			
 			for(byte i = 0; i < 22; i++)
 			{
@@ -134,7 +138,6 @@ class PuzzleSolver
 						//at this point we know it is a valid state and that it does not exist in the set
 						//create state and add it to the queue (it already was added in the set)
 						GameState nextState = new GameState(current);
-						//next.setPrev(current);
 						nextState.setState(potentialState);
 						q.add(nextState);
 					}
@@ -151,7 +154,6 @@ class PuzzleSolver
 						//at this point we know it is a valid state and that it does not exist in the set
 						//create state and add it to the queue (it already was added in the set)
 						GameState nextState = new GameState(current);
-						//nextState.setPrev(current);
 						nextState.setState(potentialState);
 						q.add(nextState);
 					}
@@ -202,7 +204,7 @@ class PuzzleSolver
 	//check if the current state is allowed (can be improved) 
 	public boolean validState (byte[] currentState)
 	{
-		//calculate the positions relative to the puzzle (not their original position) and check if they are out of bounds. 
+		//calculate the positions relative to the puzzle space (not their original position) and check if they are out of bounds. 
 		// unrolled this loop below. 
 		/*for(byte p = 0; p < 22; p++)
 		{
@@ -258,8 +260,6 @@ class PuzzleSolver
 		if(currentAux[21] <= 0 || currentAux[21] >= 9) return false;
 
 		byte x,y;
-		//get the original puzzle (only boundaries)
-		//original = generatePuzzle(original);
 		byte[][] layout = {  
 //	 		              0  1  2  3  4  5  6  7  8  9
 //			 	  ===================================================
@@ -275,7 +275,7 @@ class PuzzleSolver
 				  /*9*/	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1   }   // 9
 			 			};;
 		
-		//place all the pieces. Try to unroll loop.
+		//place all the pieces. Try to unroll loop in the future.
 		for(byte j = 0; j < 11; j++)
 		{
 			x = currentAux[(byte)(j*2)]; y = currentAux[(byte)(j*2+1)]; 
@@ -384,7 +384,7 @@ class PuzzleSolver
 	}
 	
 
-	
+	// left this part to show some tests performed in the development process
 	/*public static void main(String[] args) throws Exception 
 	{
 		long startTime = System.currentTimeMillis();
