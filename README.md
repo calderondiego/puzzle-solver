@@ -12,4 +12,8 @@ Rules:
 
 <h3> Main methods </h3>
 
-* **test**
+* **bfs** - returns a list of states to be followed to reach the objective
+* **stateChange** - deep copies a state and performs an action it
+* **reachedObjective** - returns true if the objective has been reached
+* **validState** - returns true if an action perfomed on a state is valid
+
