@@ -11,6 +11,7 @@ Rules:
 3. Pieces can't be rotated
 
 <h3> Main methods </h3>
+PuzzleSolver.java
 
 * **bfs** - returns a list of states to be followed to reach the objective
 * **stateChange** - deep copies a state and performs an action it
