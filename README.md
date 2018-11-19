@@ -10,5 +10,6 @@ Rules:
 2. Pieces can't overlap
 3. Pieces can't be rotated
 
+<h3> Main methods </h3>
 
-
+* **test**
